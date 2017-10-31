@@ -183,60 +183,6 @@ public class UserManager {
     }
 
     /**
-     * 分页查询
-     *
-     * @param pageNo   第几页
-     * @param pageSize 每页多少条数据
-     * @return pageModel
-     */
-    public PageModel<User> findUserList(int pageNo, int pageSize) {
-        StringBuffer sbSql = new StringBuffer();
-        sbSql.append("select user_id, user_name, password, contact_tel, email, create_date ")
-                .append("from ")
-                .append("( ")
-                .append("select rownum rn, user_id, user_name, password, contact_tel, email, create_date ")
-                .append("from ")
-                .append("( ")
-                .append("select user_id, user_name, password, contact_tel, email, create_date from t_user where user_id <> 'root' order by user_id ")
-                .append(")  where rownum <= ? ")
-                .append(")  where rn > ? ");
-        Connection conn = null;
-        PreparedStatement pstmt = null;
-        ResultSet rs = null;
-        PageModel<User> pageModel = null;
-        try {
-            conn = MysqlConnect.connectMysql();
-            pstmt = conn.prepareStatement(sbSql.toString());
-            pstmt.setInt(1, pageNo * pageSize);
-            pstmt.setInt(2, (pageNo - 1) * pageSize);
-            rs = pstmt.executeQuery();
-            List<User> userList = new ArrayList<User>();
-            while (rs.next()) {
-                User user = new User();
-                user.setUserId(rs.getString("user_id"));
-                user.setUserName(rs.getString("user_name"));
-                user.setPassword(rs.getString("password"));
-                user.setContactTel(rs.getString("contact_tel"));
-                user.setEmail(rs.getString("email"));
-                user.setCreateDate(rs.getTimestamp("create_date"));
-                userList.add(user);
-            }
-            pageModel = new PageModel<User>();
-            pageModel.setList(userList);
-            pageModel.setTotalRecords(getTotalRecords(conn));
-            pageModel.setPageSize(pageSize);
-            pageModel.setPageNo(pageNo);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            MysqlConnect.close(rs);
-            MysqlConnect.close(pstmt);
-            MysqlConnect.close(conn);
-        }
-        return pageModel;
-    }
-
-    /**
      * 取得总记录数
      *
      * @param conn

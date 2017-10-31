@@ -10,88 +10,15 @@
 
     <dependencies>
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.11</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
             <version>6.9.9</version>
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>org.testng</groupId>
-            <artifactId>testng-jdk14</artifactId>
-            <version>4.4.7</version>
-            <type>pom</type>
-        </dependency>
-        <dependency>
-            <groupId>com.googlecode.json-simple</groupId>
-            <artifactId>json-simple</artifactId>
-            <version>1.1</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>commons-lang</groupId>
-            <artifactId>commons-lang</artifactId>
-            <version>2.6</version>
-            <scope>test</scope>
-        </dependency>
-        <!-- Includes the Sauce JUnit helper libraries -->
-        <dependency>
-            <groupId>com.saucelabs</groupId>
-            <artifactId>sauce_junit</artifactId>
-            <version>LATEST</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.poi</groupId>
-            <artifactId>poi</artifactId>
-            <version>3.11</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.poi</groupId>
-            <artifactId>poi-ooxml</artifactId>
-            <version>3.12</version>
-        </dependency>
-        <dependency>
-            <groupId>net.sourceforge.jexcelapi</groupId>
-            <artifactId>jxl</artifactId>
-            <version>2.6.12</version>
-        </dependency>
-        <dependency>
-            <groupId>com.google.code.gson</groupId>
-            <artifactId>gson</artifactId>
-            <version>2.2.4</version>
-        </dependency>
-        <dependency>
-            <groupId>appium</groupId>
-            <artifactId>appium</artifactId>
-            <version>1.0-SNAPSHOT</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>RELEASE</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-api</artifactId>
-            <version>2.6.2</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-core</artifactId>
-            <version>RELEASE</version>
-        </dependency>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.12</version>
         </dependency>
     </dependencies>
 
@@ -119,16 +46,4 @@
         </plugins>
     </build>
 
-    <repositories>
-        <repository>
-            <id>saucelabs-repository</id>
-            <url>https://repository-saucelabs.forge.cloudbees.com/release</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-        </repository>
-    </repositories>
 </project>

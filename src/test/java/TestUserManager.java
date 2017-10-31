@@ -9,10 +9,11 @@ import java.util.Scanner;
 
 public class TestUserManager {
     public static void main(String args[]) {
-//        testAddUser();
+        //       testAddUser();
 //       // testFindUserById();
-//        //testGetUsers();
+ //         testGetUsers();
 //        testDelUser();
+//        testModifyUser();
 //        testGetUsers();
     }
 
@@ -29,10 +30,10 @@ public class TestUserManager {
         List<User> users = UserManager.getInstance().getUsers();
         for (int i = 0; i < users.size(); i++) {
             User user = users.get(i);
-            System.out.print(user.getUserName());//获取名字
+            System.out.println(user.getUserName());//获取名字
+            System.out.println(user.getUserId());//获取名字
         }
     }
-
 
     //@Test
     //测试用户添加
@@ -62,7 +63,26 @@ public class TestUserManager {
         Scanner str = new Scanner(System.in);
         System.out.print("请输入用户Id:");
         String userId = str.next();
-        User user=UserManager.getInstance().findUserById(userId);
+        User user = UserManager.getInstance().findUserById(userId);
         System.out.print("用户的名字:" + user.getUserName());
+    }
+
+    //测试根据id进行用户信息的修改
+    public static void testModifyUser() {
+        User user = new User();
+        Scanner str = new Scanner(System.in);
+        System.out.print("请输入用户Id:");
+        String id = str.next();
+        System.out.print("请输入用户name:");
+        String name = str.next();
+        System.out.print("请输入用户password:");
+        String password = str.next();
+        System.out.print("请输入用户tel:");
+        String tel = str.next();
+        user.setUserId(id);
+        user.setUserName(name);
+        user.setPassword(password);
+        user.setContactTel(tel);
+        UserManager.getInstance().modifyUser(user);
     }
 }
