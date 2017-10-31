@@ -30,6 +30,41 @@ public class UserManager {
     public static UserManager getInstance() {
         return instance;
     }
+    /**
+     * 取得用户列表
+     * @return
+     */
+    public List<User> getUsers(){//如果不是static 我们取用户的时候可能要new 一个新的用户
+        String sql = "select * from t_user";
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        User user = null;
+        List<User> users = new ArrayList<User>();
+        try {
+            conn = MysqlConnect.connectMysql();
+            pstmt = conn.prepareStatement(sql);
+            rs = pstmt.executeQuery();
+            while (rs.next()) {
+                user = new User();
+                user.setUserId(rs.getString("id"));
+                user.setUserName(rs.getString("name"));
+                user.setPassword(rs.getString("password"));
+                user.setContactTel(rs.getString("tel"));
+                user.setEmail(rs.getString("email"));
+                user.setCreateDate(rs.getTimestamp("create_date"));
+                users.add(user);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            MysqlConnect.close(rs);
+            MysqlConnect.close(pstmt);
+            MysqlConnect.close(conn);
+        }
+        return users;
+    }
+
 
     /**
      * 添加用户的方法
