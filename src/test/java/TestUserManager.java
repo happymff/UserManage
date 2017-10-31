@@ -6,12 +6,18 @@
 import java.util.List;
 import java.util.Scanner;
 
-import junit.framework.TestCase;
 
-public class TestUserManager extends TestCase {
+public class TestUserManager {
+    public static void main(String args[]) {
+//        testAddUser();
+//       // testFindUserById();
+//        //testGetUsers();
+//        testDelUser();
+//        testGetUsers();
+    }
 
     //测试删除操作
-    public void testDelUser() {
+    public static void testDelUser() {
         Scanner str = new Scanner(System.in);
         System.out.print("请输入要删除的用户Id:");
         String userId = str.next();
@@ -19,7 +25,7 @@ public class TestUserManager extends TestCase {
     }
 
     //测试查询操作
-    public void testGetUsers() {
+    public static void testGetUsers() {
         List<User> users = UserManager.getInstance().getUsers();
         for (int i = 0; i < users.size(); i++) {
             User user = users.get(i);
@@ -27,8 +33,10 @@ public class TestUserManager extends TestCase {
         }
     }
 
+
+    //@Test
     //测试用户添加
-    public void testAddUser() {
+    public static void testAddUser() {
         User user = new User();
         Scanner str = new Scanner(System.in);
         System.out.print("请输入用户Id:");
@@ -50,12 +58,11 @@ public class TestUserManager extends TestCase {
     }
 
     //根据用户Id查询
-    public void testFindUserById() {
+    public static void testFindUserById() {
         Scanner str = new Scanner(System.in);
         System.out.print("请输入用户Id:");
         String userId = str.next();
-        UserManager.getInstance().findUserById(userId);
-        User user = new User();
+        User user=UserManager.getInstance().findUserById(userId);
         System.out.print("用户的名字:" + user.getUserName());
     }
 }

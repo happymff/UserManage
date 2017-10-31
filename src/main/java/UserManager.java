@@ -2,11 +2,7 @@
  * Created by mff on 2017/10/31.
  */
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Timestamp;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -37,20 +33,21 @@ public class UserManager {
     public List<User> getUsers(){//如果不是static 我们取用户的时候可能要new 一个新的用户
         String sql = "select * from t_user";
         Connection conn = null;
-        PreparedStatement pstmt = null;
+        Statement pstmt = null;
         ResultSet rs = null;
         User user = null;
         List<User> users = new ArrayList<User>();
         try {
+            // Statement,createStatement用来执行SQL语句
             conn = MysqlConnect.connectMysql();
-            pstmt = conn.prepareStatement(sql);
-            rs = pstmt.executeQuery();
+            pstmt = conn.createStatement();
+            rs = pstmt.executeQuery(sql);
             while (rs.next()) {
                 user = new User();
-                user.setUserId(rs.getString("id"));
-                user.setUserName(rs.getString("name"));
+                user.setUserId(rs.getString("user_id"));
+                user.setUserName(rs.getString("user_name"));
                 user.setPassword(rs.getString("password"));
-                user.setContactTel(rs.getString("tel"));
+                user.setContactTel(rs.getString("contact_tel"));
                 user.setEmail(rs.getString("email"));
                 user.setCreateDate(rs.getTimestamp("create_date"));
                 users.add(user);
@@ -59,7 +56,7 @@ public class UserManager {
             e.printStackTrace();
         } finally {
             MysqlConnect.close(rs);
-            MysqlConnect.close(pstmt);
+            //MysqlConnect.close(pstmt);
             MysqlConnect.close(conn);
         }
         return users;
@@ -86,8 +83,7 @@ public class UserManager {
             pstmt.setString(4, user.getContactTel());
             pstmt.setString(5, user.getEmail());
             pstmt.setTimestamp(6, new Timestamp(new Date().getTime()));//能保存年月日 时分秒
-
-            pstmt.executeQuery();
+            pstmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {

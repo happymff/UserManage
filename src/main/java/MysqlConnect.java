@@ -7,9 +7,10 @@ import java.sql.*;
 public class MysqlConnect {
     public static Connection connectMysql() {
         // 驱动程序名
-        String driver = "com.mysql.jdbc.Driver";
+       // String driver = "com.mysql.jdbc.Driver";
+        String driver = "com.mysql.cj.jdbc.Driver";
         // URL指向要访问的数据库名students
-        String url = "jdbc:mysql://localhost/framework";
+        String url = "jdbc:mysql://localhost/myDataBase";
         // MySQL配置时的用户名
         String user = "root";
         // MySQL配置时的密码
@@ -113,7 +114,7 @@ public class MysqlConnect {
     }
     /**
      * 关闭ResultSet
-     * @param pstmt
+     * @param rs
      */
     public static void close(ResultSet rs ) {
         if (rs != null) {
