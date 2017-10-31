@@ -3,9 +3,13 @@
  */
 
 
+import UserManager.JsonExtracter;
+import UserManager.User;
+import UserManager.UserManager;
+import data.ReadJsonFile;
+
 import java.util.List;
 import java.util.Scanner;
-
 
 public class TestUserManager {
     public static void main(String args[]) {
@@ -15,6 +19,8 @@ public class TestUserManager {
 //        testDelUser();
 //        testModifyUser();
 //        testGetUsers();
+        testAddUserByJsonData();
+        testGetUsers();
     }
 
     //测试删除操作
@@ -30,12 +36,11 @@ public class TestUserManager {
         List<User> users = UserManager.getInstance().getUsers();
         for (int i = 0; i < users.size(); i++) {
             User user = users.get(i);
-            System.out.println(user.getUserName());//获取名字
             System.out.println(user.getUserId());//获取名字
+            System.out.println(user.getUserName());//获取名字
         }
     }
 
-    //@Test
     //测试用户添加
     public static void testAddUser() {
         User user = new User();
@@ -50,6 +55,24 @@ public class TestUserManager {
         String tel = str.next();
         System.out.print("请输入用户email:");
         String email = str.next();
+        user.setUserId(id);
+        user.setUserName(name);
+        user.setPassword(password);
+        user.setContactTel(tel);
+        user.setEmail(email);
+        UserManager.getInstance().addUser(user);
+    }
+
+    //测试用户添加
+    public static void testAddUserByJsonData() {
+        JsonExtracter je = new JsonExtracter();
+        User user = new User();
+        String json =ReadJsonFile.readFile("src/jsonFile.json");
+        String id = je.getJsonSomeString(json,"id");
+        String name = je.getJsonSomeString(json,"name");
+        String password = je.getJsonSomeString(json,"password");
+        String tel = je.getJsonSomeString(json,"tel");
+        String email = je.getJsonSomeString(json,"email");
         user.setUserId(id);
         user.setUserName(name);
         user.setPassword(password);

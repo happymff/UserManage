@@ -1,4 +1,4 @@
-/**
+package UserManager; /**
  * Created by mff on 2017/10/31.
  */
 
@@ -26,11 +26,13 @@ public class UserManager {
     public static UserManager getInstance() {
         return instance;
     }
+
     /**
      * 取得用户列表
+     *
      * @return
      */
-    public List<User> getUsers(){//如果不是static 我们取用户的时候可能要new 一个新的用户
+    public List<User> getUsers() {//如果不是static 我们取用户的时候可能要new 一个新的用户
         String sql = "select * from t_user";
         Connection conn = null;
         Statement pstmt = null;
@@ -56,7 +58,7 @@ public class UserManager {
             e.printStackTrace();
         } finally {
             MysqlConnect.close(rs);
-            //MysqlConnect.close(pstmt);
+            //UserManager.UserManager.MysqlConnect.close(pstmt);
             MysqlConnect.close(conn);
         }
         return users;

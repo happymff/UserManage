@@ -1,4 +1,4 @@
-/**
+package UserManager; /**
  * Created by mff on 2017/5/15.
  */
 
@@ -9,8 +9,8 @@ public class MysqlConnect {
         // 驱动程序名
        // String driver = "com.mysql.jdbc.Driver";
         String driver = "com.mysql.cj.jdbc.Driver";
-        // URL指向要访问的数据库名students
-        String url = "jdbc:mysql://localhost/myDataBase";
+        // URL指向要访问的数据库,并设置编码方式为UTF-8
+        String url = "jdbc:mysql://localhost/myDataBase?useUnicode=true&characterEncoding=UTF-8";
         // MySQL配置时的用户名
         String user = "root";
         // MySQL配置时的密码
