@@ -8,6 +8,7 @@ import UserManager.User;
 import UserManager.UserManager;
 import data.ReadJsonFile;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -15,12 +16,13 @@ public class TestUserManager {
     public static void main(String args[]) {
         //       testAddUser();
 //       // testFindUserById();
- //         testGetUsers();
+        //         testGetUsers();
 //        testDelUser();
 //        testModifyUser();
 //        testGetUsers();
-        testAddUserByJsonData();
-        testGetUsers();
+//        testAddUserByJsonData();
+//        testGetUsers();
+        testGetTotalRecords();
     }
 
     //测试删除操作
@@ -39,6 +41,16 @@ public class TestUserManager {
             System.out.println(user.getUserId());//获取名字
             System.out.println(user.getUserName());//获取名字
         }
+    }
+
+    public static void testGetTotalRecords() {
+        int count = 0;
+        try {
+            count = UserManager.getInstance().getTotalRecords();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        System.out.println("记录总条数："+count);//获取名字
     }
 
     //测试用户添加
@@ -67,12 +79,12 @@ public class TestUserManager {
     public static void testAddUserByJsonData() {
         JsonExtracter je = new JsonExtracter();
         User user = new User();
-        String json =ReadJsonFile.readFile("src/jsonFile.json");
-        String id = je.getJsonSomeString(json,"id");
-        String name = je.getJsonSomeString(json,"name");
-        String password = je.getJsonSomeString(json,"password");
-        String tel = je.getJsonSomeString(json,"tel");
-        String email = je.getJsonSomeString(json,"email");
+        String json = ReadJsonFile.readFile("src/jsonFile.json");
+        String id = je.getJsonSomeString(json, "id");
+        String name = je.getJsonSomeString(json, "name");
+        String password = je.getJsonSomeString(json, "password");
+        String tel = je.getJsonSomeString(json, "tel");
+        String email = je.getJsonSomeString(json, "email");
         user.setUserId(id);
         user.setUserName(name);
         user.setPassword(password);

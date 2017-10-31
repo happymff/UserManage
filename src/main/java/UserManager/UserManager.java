@@ -187,23 +187,24 @@ public class UserManager {
     /**
      * 取得总记录数
      *
-     * @param conn
-     * @return
+     * @return TotalRecords
      */
-    private int getTotalRecords(Connection conn)
+    public int getTotalRecords()
             throws SQLException {
         String sql = "select count(*) from t_user where user_id <> 'root'";
-        PreparedStatement pstmt = null;
+        Connection conn = null;
+        Statement pstmt = null;
         ResultSet rs = null;
         int count = 0;
         try {
-            pstmt = conn.prepareStatement(sql);
-            rs = pstmt.executeQuery();
+            conn = MysqlConnect.connectMysql();
+            pstmt = conn.createStatement();
+            rs = pstmt.executeQuery(sql);
             rs.next();
             count = rs.getInt(1);
         } finally {
             MysqlConnect.close(rs);
-            MysqlConnect.close(pstmt);
+            //MysqlConnect.close(pstmt);
         }
         return count;
     }
