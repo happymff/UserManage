@@ -79,7 +79,9 @@ public class MysqlConnect {
 
 
     public static void main(String[] args) {
-        //测试数据库连接
+        //测试连接数据库
         Connection connection=connectMysql();
+
+
     }
 }
